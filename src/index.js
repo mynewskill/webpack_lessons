@@ -4,4 +4,11 @@ const abc = {
     three: "logic"
 };
 
+const xyz = {
+    ...abc,
+    ttt: 3,
+    zz: 2
+}
+
 console.log(abc);
+console.log(xyz);
