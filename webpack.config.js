@@ -1,8 +1,20 @@
 const path = require("path");
+const miniCssExptractPlugin = require("mini-css-extract-plugin");
 
 const config = {
+  plugins: [new miniCssExptractPlugin()],
+
   module: {
     rules: [
+      {
+        test: /\.(s[ac]|c)ss$/i,
+        use: [
+          miniCssExptractPlugin.loader,
+          "css-loader",
+          "postcss-loader",
+          "sass-loader",
+        ],
+      },
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -19,6 +31,7 @@ module.exports = (env, argv) => {
     config.devtool = "source-map";
     config.devServer = {
       contentBase: path.join(__dirname, "dist"),
+      hot: true,
     };
   }
 
@@ -28,6 +41,6 @@ module.exports = (env, argv) => {
     //     clean: true,
     // }
   }
-  console.log(config.devtool, argv.mode);
+  // console.log(config.devtool, argv.mode);
   return config;
 };
